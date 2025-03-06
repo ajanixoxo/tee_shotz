@@ -26,43 +26,43 @@ const PortfolioPage = () => {
     weddings: Array(6)
       .fill()
       .map((_, i) => ({
-        src: `/placeholder.svg?height=${400 + i * 10}&width=${600 + i * 10}`,
+        src: `/images/img (76).jpg`,
         alt: `Wedding photography sample ${i + 1}`,
       })),
     convocation: Array(6)
       .fill()
       .map((_, i) => ({
-        src: `/placeholder.svg?height=${400 + i * 10}&width=${600 + i * 10}`,
+        src: `"/images/img (38).jpg`,
         alt: `Graduation photography sample ${i + 1}`,
       })),
     birthday: Array(6)
       .fill()
       .map((_, i) => ({
-        src: `/placeholder.svg?height=${400 + i * 10}&width=${600 + i * 10}`,
+        src: `/images/img (28).jpg`,
         alt: `Birthday photography sample ${i + 1}`,
       })),
     casual: Array(6)
       .fill()
       .map((_, i) => ({
-        src: `/placeholder.svg?height=${400 + i * 10}&width=${600 + i * 10}`,
+        src: `/images/img (4).jpg`,
         alt: `Casual photography sample ${i + 1}`,
       })),
     events: Array(6)
       .fill()
       .map((_, i) => ({
-        src: `/placeholder.svg?height=${400 + i * 10}&width=${600 + i * 10}`,
+        src: `/images/img (2).jpg`,
         alt: `Event photography sample ${i + 1}`,
       })),
     bts: Array(6)
       .fill()
       .map((_, i) => ({
-        src: `/placeholder.svg?height=${400 + i * 10}&width=${600 + i * 10}`,
+        src: `/images/img (8).jpg`,
         alt: `Behind the scenes photography sample ${i + 1}`,
       })),
     commercial: Array(6)
       .fill()
       .map((_, i) => ({
-        src: `/placeholder.svg?height=${400 + i * 10}&width=${600 + i * 10}`,
+        src: `/images/img (28).jpg`,
         alt: `Commercial photography sample ${i + 1}`,
       })),
   }

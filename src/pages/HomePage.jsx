@@ -18,37 +18,66 @@ import BookingForm from "../components/BookingForm"
 import ContactForm from "../components/ContactForm"
 import TestimonialCard from "../components/TestimonialCard"
 import ImageCard from "../components/ImageCard"
+import PhotoGrid from "../components/PhotoGrid"
 
+const heroImages = [
+    // Replace these with your actual image paths
+    { src: "/images/img (2).jpg", alt: "Wedding couple" },
+    { src: "/images/img (25).jpg", alt: "Graduation ceremony" },
+    { src: "/images/img (42).jpg", alt: "Birthday celebration" },
+    { src: "/images/img (15).jpg", alt: "Portrait session" },
+    { src: "/images/img (56).jpg", alt: "Corporate event" },
+    { src: "/images/img (1).jpg", alt: "Family portrait" },
+    { src: "/images/img (65).jpg", alt: "Product photography" },
+    { src: "/images/img (59).jpg", alt: "Fashion shoot" },
+    { src: "/images/img (70).jpg", alt: "Landscape" },
+    { src: "/images/img (34).jpg", alt: "Street photography" },
+    { src: "/images/img (22).jpg", alt: "Architecture" },
+    { src: "/images/img (32).jpg", alt: "Food photography" },
+    { src: "/images/img (13).jpg", alt: "Travel photography" },
+    { src: "/images/img (56).jpg", alt: "Sports event" },
+    { src: "/images/img (32).jpg", alt: "Concert photography" },
+    { src: "/images/img (54).jpg", alt: "Pet photography" },
+    { src: "/images/img (63).jpg", alt: "Nature close-up" },
+    { src: "/images/img (34).jpg", alt: "Beach wedding" },
+    { src: "/images/img (62).jpg", alt: "Newborn photography" },
+    { src: "/images/img (34).jpg", alt: "Engagement shoot" },
+    { src: "/images/img (42).jpg", alt: "Engagement shoot" },
+    { src: "/images/img (12).jpg", alt: "Engagement shoot" },
+    { src: "/images/img (24).jpg", alt: "Engagement shoot" },
+    { src: "/images/img (14).jpg", alt: "Engagement shoot" },
+  ]
+  
 const HomePage = () => {
   // Sample portfolio images for preview section
   const portfolioPreview = [
     {
-      src: "https://placehold.co/600x400",
+      src: "/images/img (76).jpg",
       alt: "Wedding photography",
       category: "Weddings",
     },
     {
-      src: "https://placehold.co/600x400",
+      src: "/images/img (36).jpg",
       alt: "Graduation photography",
       category: "Convocation",
     },
     {
-      src: "https://placehold.co/600x400",
+      src: "/images/img (29).jpg",
       alt: "Birthday photography",
       category: "Birthday",
     },
     {
-      src: "https://placehold.co/600x400",
+      src: "/images/img (5).jpg",
       alt: "Casual photography",
       category: "Casual",
     },
     {
-      src: "https://placehold.co/600x400",
+      src: "/images/img (1).jpg",
       alt: "Event photography",
       category: "Events",
     },
     {
-      src: "https://placehold.co/600x400",
+      src: "/images/img (52).jpg",
       alt: "Behind the scenes",
       category: "BTS",
     },
@@ -85,13 +114,9 @@ const HomePage = () => {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center">
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img
-            src="https://placehold.co/1000x900"
-            alt="Hero background"
-            className="w-full h-full object-cover"
-          />
+        <PhotoGrid images={heroImages} className="animate-slow-pan" />
           <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         </div>
 
@@ -125,7 +150,7 @@ const HomePage = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div data-aos="fade-right">
               <img
-                src="/placeholder?height=600&width=600"
+                src="/images/img (52).jpg"
                 alt="Photographer portrait"
                 className="rounded-lg shadow-lg w-full h-auto"
               />
