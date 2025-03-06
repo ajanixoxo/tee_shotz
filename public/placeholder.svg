@@ -1,0 +1,73 @@
+<svg width="100%" height="100%" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with gradient -->
+  <rect width="100%" height="100%" fill="#f5f5f5"/>
+  
+  <!-- Grid pattern -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#e0e0e0" stroke-width="1"/>
+  </pattern>
+  <rect width="100%" height="100%" fill="url(#grid)"/>
+  
+  <!-- Camera icon -->
+  <g transform="translate(400, 300) scale(3)">
+    <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" 
+          fill="none" stroke="#333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="12" cy="13" r="3" fill="none" stroke="#333" stroke-width="1.5"/>
+  </g>
+  
+  <!-- Tee_Shotz text -->
+  <text x="400" y="400" font-family="cursive, sans-serif" font-size="24" text-anchor="middle" fill="#333">
+    Tee_Shotz
+  </text>
+  
+  <!-- Dimensions display (will show the actual dimensions) -->
+  <text id="dimensions" x="400" y="430" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#666">
+    800 × 600
+  </text>
+  
+  <!-- Script to update dimensions text -->
+  <script type="text/javascript">
+    <![CDATA[
+    (function() {
+      var svg = document.querySelector('svg');
+      var dimensionsText = document.getElementById('dimensions');
+      
+      function updateDimensions() {
+        var width = svg.width.baseVal.value;
+        var height = svg.height.baseVal.value;
+        
+        // If SVG has percentage dimensions, try to get from viewBox
+        if (!width || !height) {
+          var viewBox = svg.viewBox.baseVal;
+          if (viewBox) {
+            width = viewBox.width;
+            height = viewBox.height;
+          }
+        }
+        
+        // If URL has width and height parameters, use those
+        var urlParams = new URLSearchParams(window.location.search);
+        var paramWidth = urlParams.get('width');
+        var paramHeight = urlParams.get('height');
+        
+        if (paramWidth && paramHeight) {
+          width = paramWidth;
+          height = paramHeight;
+          dimensionsText.textContent = width + ' × ' + height;
+        } else {
+          dimensionsText.textContent = Math.round(width) + ' × ' + Math.round(height);
+        }
+      }
+      
+      // Update on load
+      updateDimensions();
+      
+      // Update on resize if possible
+      if (window.ResizeObserver) {
+        new ResizeObserver(updateDimensions).observe(svg);
+      }
+    })();
+    ]]>
+  </script>
+</svg>
+

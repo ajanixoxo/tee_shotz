@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-font: "Dancing Script", cursive;
+  --secondary-font: "Poppins", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--secondary-font);
+  color: #1a1a1a;
+  background-color: #f8f8f8;
+}
+
+h1,
+h2,
+h3,
+.handwriting {
+  font-family: var(--primary-font);
+}
+
+.image-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.image-card:hover::before {
+  opacity: 1;
+}
+
+.image-card img {
+  transition: transform 0.5s ease;
+}
+
+.image-card:hover img {
+  transform: scale(1.05);
+}
+
+.wind-path {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  z-index: 2;
+  animation: wind-animation 1.5s infinite;
+}
+
+@keyframes wind-animation {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.lazy-image {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.lazy-image.loaded {
+  opacity: 1;
+}
+
+.gallery-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.gallery-modal.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.gallery-modal img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+}
+
