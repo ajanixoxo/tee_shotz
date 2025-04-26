@@ -17,52 +17,44 @@ const PortfolioPage = () => {
     { id: "birthday", name: "Birthday" },
     { id: "casual", name: "Casual" },
     { id: "events", name: "Events" },
-    { id: "bts", name: "BTS" },
-    { id: "commercial", name: "Commercial" },
+    { id: "FP", name: "Family Portraits" },
   ]
-
   // Sample images for each category
   const portfolioImages = {
     weddings: Array(6)
       .fill()
       .map((_, i) => ({
-        src: `/images/img (76).jpg`,
+        src: `/images/weddings/weddings (${i+1}).jpg`,
         alt: `Wedding photography sample ${i + 1}`,
       })),
     convocation: Array(6)
       .fill()
       .map((_, i) => ({
-        src: `"/images/img (38).jpg`,
+        src: `/images/convocation/convocation (${i+1}).jpg`,
         alt: `Graduation photography sample ${i + 1}`,
       })),
-    birthday: Array(6)
+    birthday: Array(3)
       .fill()
       .map((_, i) => ({
-        src: `/images/img (28).jpg`,
+        src: `/images/birthday/birthday (${i+1}).jpg`,
         alt: `Birthday photography sample ${i + 1}`,
       })),
     casual: Array(6)
       .fill()
       .map((_, i) => ({
-        src: `/images/img (4).jpg`,
+        src: `/images/causal/causal (${i+1}).jpg`,
         alt: `Casual photography sample ${i + 1}`,
       })),
     events: Array(6)
       .fill()
       .map((_, i) => ({
-        src: `/images/img (2).jpg`,
+        src: `/images/events/event (${i+3}).JPG`,
         alt: `Event photography sample ${i + 1}`,
       })),
-    bts: Array(6)
+    FP: Array(6)
       .fill()
       .map((_, i) => ({
-        src: `/images/img (8).jpg`,
-        alt: `Behind the scenes photography sample ${i + 1}`,
-      })),
-    commercial: Array(6)
-      .fill()
-      .map((_, i) => ({
-        src: `/images/img (28).jpg`,
+        src: `/images/FP/FP (${i+1}).jpg`,
         alt: `Commercial photography sample ${i + 1}`,
       })),
   }

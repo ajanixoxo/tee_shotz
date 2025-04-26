@@ -1,3 +1,4 @@
+
 "use client"
 import { Link } from "react-router-dom"
 import {
@@ -21,63 +22,63 @@ import ImageCard from "../components/ImageCard"
 import PhotoGrid from "../components/PhotoGrid"
 
 const heroImages = [
-    // Replace these with your actual image paths
-    { src: "/images/img (2).jpg", alt: "Wedding couple" },
-    { src: "/images/img (25).jpg", alt: "Graduation ceremony" },
-    { src: "/images/img (42).jpg", alt: "Birthday celebration" },
-    { src: "/images/img (15).jpg", alt: "Portrait session" },
-    { src: "/images/img (56).jpg", alt: "Corporate event" },
-    { src: "/images/img (1).jpg", alt: "Family portrait" },
-    { src: "/images/img (65).jpg", alt: "Product photography" },
-    { src: "/images/img (59).jpg", alt: "Fashion shoot" },
-    { src: "/images/img (70).jpg", alt: "Landscape" },
-    { src: "/images/img (34).jpg", alt: "Street photography" },
-    { src: "/images/img (22).jpg", alt: "Architecture" },
-    { src: "/images/img (32).jpg", alt: "Food photography" },
-    { src: "/images/img (13).jpg", alt: "Travel photography" },
-    { src: "/images/img (56).jpg", alt: "Sports event" },
-    { src: "/images/img (32).jpg", alt: "Concert photography" },
-    { src: "/images/img (54).jpg", alt: "Pet photography" },
-    { src: "/images/img (63).jpg", alt: "Nature close-up" },
-    { src: "/images/img (34).jpg", alt: "Beach wedding" },
-    { src: "/images/img (62).jpg", alt: "Newborn photography" },
-    { src: "/images/img (34).jpg", alt: "Engagement shoot" },
-    { src: "/images/img (42).jpg", alt: "Engagement shoot" },
-    { src: "/images/img (12).jpg", alt: "Engagement shoot" },
-    { src: "/images/img (24).jpg", alt: "Engagement shoot" },
-    { src: "/images/img (14).jpg", alt: "Engagement shoot" },
-  ]
+  { src: "/images/preg/preg (1).jpg", alt: "Wedding couple" },
+  { src: "/images/convocation/convocation (2).jpg", alt: "Graduation ceremony" },
+  { src: "/images/birthday/birthday (3).jpg", alt: "Birthday celebration" },
+  { src: "/images/modelling/modelling (4).jpg", alt: "Portrait session" },
+  { src: "/images/FP/FP (5).jpg", alt: "Corporate event" },
+  { src: "/images/causal/causal (6).jpg", alt: "Family portrait" },
+  { src: "/images/modelling/modelling (7).jpg", alt: "Product photography" },
+  { src: "/images/FP/FP (4).jpg", alt: "Fashion shoot" },
+  { src: "/images/birthday/birthday (2).jpg", alt: "Landscape" },
+  { src: "/images/preg/preg (3).jpg", alt: "Street photography" },
+  { src: "/images/convocation/convocation (10).jpg", alt: "Architecture" },
+  { src: "/images/convocation/convocation (8).jpg", alt: "Food photography" },
+  { src: "/images/causal/causal (13).jpg", alt: "Travel photography" },
+  { src: "/images/birthday/birthday (1).jpg", alt: "Sports event" },
+  { src: "/images/modelling/modelling (6).jpg", alt: "Concert photography" },
+  { src: "/images/FP/FP (3).jpg", alt: "Travel photography" },
+  { src: "/images/weddings/weddings (1).jpg", alt: "Sports event" },
+  { src: "/images/FP/FP (4).jpg", alt: "Concert photography" },
+  { src: "/images/causal/causal (13).jpg", alt: "Travel photography" },
+  { src: "/images/birthday/birthday (1).jpg", alt: "Sports event" },
+  { src: "/images/preg/preg (4).jpg", alt: "Concert photography" },
+  { src: "/images/weddings/weddings (3).jpg", alt: "Birthday celebration" },
+  { src: "/images/modelling/modelling (4).jpg", alt: "Portrait session" },
+  { src: "/images/modelling/modelling (4).jpg", alt: "Portrait session" },
+];
+
   
 const HomePage = () => {
   // Sample portfolio images for preview section
   const portfolioPreview = [
     {
-      src: "/images/img (76).jpg",
+      src: "/images/weddings/weddings (6).jpg",
       alt: "Wedding photography",
       category: "Weddings",
     },
     {
-      src: "/images/img (36).jpg",
+      src: "/images/convocation/convocation (3).jpg",
       alt: "Graduation photography",
       category: "Convocation",
     },
     {
-      src: "/images/img (29).jpg",
+      src: "/images/birthday/birthday (2).jpg",
       alt: "Birthday photography",
       category: "Birthday",
     },
     {
-      src: "/images/img (5).jpg",
+      src: "/images/causal/causal (5).jpg",
       alt: "Casual photography",
       category: "Casual",
     },
     {
-      src: "/images/img (1).jpg",
+      src: "/images/events/event (1).jpg",
       alt: "Event photography",
       category: "Events",
     },
     {
-      src: "/images/img (52).jpg",
+      src: "/images/causal/causal (2).jpg",
       alt: "Behind the scenes",
       category: "BTS",
     },
@@ -150,7 +151,7 @@ const HomePage = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div data-aos="fade-right">
               <img
-                src="/images/img (52).jpg"
+                src="/images/causal/causal (16).jpg"
                 alt="Photographer portrait"
                 className="rounded-lg shadow-lg w-full h-auto"
               />
