@@ -20,6 +20,45 @@ import ContactForm from "../components/ContactForm"
 import TestimonialCard from "../components/TestimonialCard"
 import ImageCard from "../components/ImageCard"
 import PhotoGrid from "../components/PhotoGrid"
+import portfolioData from '../../portfolio-output.json';
+
+function getLargeGoogleImageUrl(originalUrl, size = 990) {
+  const match = originalUrl.match(/id=([^&]+)/);
+  if (!match) return originalUrl;
+  const fileId = match[1];
+  return `https://lh3.googleusercontent.com/d/${fileId}=s${size}`;
+}
+
+function flattenPortfolioPreviewData(data, n = 6) {
+  if (!data || !data.PICTURES || !data.PICTURES.PICTURES) return {};
+  const result = {};
+  const mainCategories = Object.keys(data.PICTURES.PICTURES);
+  for (const mainCat of mainCategories) {
+    let images = [];
+    function collectImages(obj) {
+      if (Array.isArray(obj)) {
+        images = images.concat(obj);
+      } else if (typeof obj === 'object' && obj !== null) {
+        for (const key in obj) {
+          collectImages(obj[key]);
+        }
+      }
+    }
+    collectImages(data.PICTURES.PICTURES[mainCat]);
+    // Map url to src and pick n random images
+    const shuffled = images.slice().sort(() => 0.5 - Math.random());
+    result[mainCat] = shuffled.slice(0, n).map(img => ({
+      ...img,
+      src: getLargeGoogleImageUrl(img.url, 990),
+      alt: img.name || mainCat,
+      category: mainCat,
+    }));
+  }
+  return result;
+}
+
+const portfolioPreviewImages = flattenPortfolioPreviewData(portfolioData, 4);
+const previewCategories = Object.keys(portfolioPreviewImages);
 
 const heroImages = [
   { src: "/images/preg/preg (1).jpg", alt: "Wedding couple" },
@@ -51,38 +90,38 @@ const heroImages = [
   
 const HomePage = () => {
   // Sample portfolio images for preview section
-  const portfolioPreview = [
-    {
-      src: "/images/weddings/weddings (6).jpg",
-      alt: "Wedding photography",
-      category: "Weddings",
-    },
-    {
-      src: "/images/convocation/convocation (3).jpg",
-      alt: "Graduation photography",
-      category: "Convocation",
-    },
-    {
-      src: "/images/birthday/birthday (2).jpg",
-      alt: "Birthday photography",
-      category: "Birthday",
-    },
-    {
-      src: "/images/causal/causal (5).jpg",
-      alt: "Casual photography",
-      category: "Casual",
-    },
-    {
-      src: "/images/events/event (1).jpg",
-      alt: "Event photography",
-      category: "Events",
-    },
-    {
-      src: "/images/causal/causal (2).jpg",
-      alt: "Behind the scenes",
-      category: "BTS",
-    },
-  ]
+  // const portfolioPreview = [
+  //   {
+  //     src: "/images/weddings/weddings (6).jpg",
+  //     alt: "Wedding photography",
+  //     category: "Weddings",
+  //   },
+  //   {
+  //     src: "/images/convocation/convocation (3).jpg",
+  //     alt: "Graduation photography",
+  //     category: "Convocation",
+  //   },
+  //   {
+  //     src: "/images/birthday/birthday (2).jpg",
+  //     alt: "Birthday photography",
+  //     category: "Birthday",
+  //   },
+  //   {
+  //     src: "/images/causal/causal (5).jpg",
+  //     alt: "Casual photography",
+  //     category: "Casual",
+  //   },
+  //   {
+  //     src: "/images/events/event (1).jpg",
+  //     alt: "Event photography",
+  //     category: "Events",
+  //   },
+  //   {
+  //     src: "/images/causal/causal (2).jpg",
+  //     alt: "Behind the scenes",
+  //     category: "BTS",
+  //   },
+  // ]
 
   // Sample testimonials
   const testimonials = [
@@ -113,11 +152,11 @@ const HomePage = () => {
   ]
 
   return (
-    <>
+    <div className="overflow-hidden">
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-        <PhotoGrid images={heroImages} className="animate-slow-pan" />
+        <PhotoGrid images={heroImages} className="animate-slow-pan " />
           <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         </div>
 
@@ -146,7 +185,7 @@ const HomePage = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-white">
+      <section id="about" className="py-20 bg-white overflow-hidden">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div data-aos="fade-right">
@@ -202,7 +241,7 @@ const HomePage = () => {
 
               <a
                 href="#contact"
-                className="inline-flex items-center px-6 py-3 bg-black text-white rounded-md hover:bg-gray-800 transition-colors"
+                className="inline-flex items-center px-6 py-3 bg-gray-700 hover:bg-gray-900 text-white rounded-md  transition-colors"
               >
                 Get in Touch
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -213,7 +252,7 @@ const HomePage = () => {
       </section>
 
       {/* Portfolio Preview Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-100">
         <div className="container mx-auto px-4 md:px-6">
           <SectionTitle
             title="Portfolio Highlights"
@@ -222,22 +261,24 @@ const HomePage = () => {
           />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {portfolioPreview.map((item, index) => (
-              <Link to={`/portfolio#${item.category.toLowerCase()}`} key={index}>
-                <ImageCard
-                  src={item.src || "/placeholder"}
-                  alt={item.alt}
-                  category={item.category}
-                  onClick={() => {}}
-                />
-              </Link>
-            ))}
+            {previewCategories.map((cat) =>
+              portfolioPreviewImages[cat].map((item, index) => (
+                <Link to={`/portfolio/${cat.toLowerCase().replace(/\s+/g, '-')}`} key={item.id || index}>
+                  <ImageCard
+                    src={item.src}
+                    alt={item.alt}
+                    category={cat}
+                    onClick={() => {}}
+                  />
+                </Link>
+              ))
+            )}
           </div>
 
           <div className="text-center" data-aos="fade-up">
             <Link
               to="/portfolio"
-              className="inline-flex items-center px-8 py-3 bg-black text-white rounded-md hover:bg-gray-800 transition-colors"
+              className="inline-flex items-center px-8 py-3 bg-gray-700 text-[#2D2D2D] rounded-md hover:bg-[#7D5A3A] hover:text-white transition-colors"
             >
               View Full Portfolio
               <ArrowRight className="ml-2 h-4 w-4" />
@@ -247,7 +288,7 @@ const HomePage = () => {
       </section>
 
       {/* Services Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white overflow-hidden ">
         <div className="container mx-auto px-4 md:px-6">
           <SectionTitle
             title="Photography Services"
@@ -257,7 +298,7 @@ const HomePage = () => {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="bg-gray-50 p-6 rounded-lg shadow-sm" data-aos="fade-up">
-              <div className="bg-black w-12 h-12 rounded-full flex items-center justify-center mb-4">
+              <div className="bg-gray-700 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                 <Heart className="h-6 w-6 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-3">Wedding Photography</h3>
@@ -272,7 +313,7 @@ const HomePage = () => {
             </div>
 
             <div className="bg-gray-50 p-6 rounded-lg shadow-sm" data-aos="fade-up" data-aos-delay="100">
-              <div className="bg-black w-12 h-12 rounded-full flex items-center justify-center mb-4">
+              <div className="bg-gray-700 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                 <Award className="h-6 w-6 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-3">Event Coverage</h3>
@@ -287,7 +328,7 @@ const HomePage = () => {
             </div>
 
             <div className="bg-gray-50 p-6 rounded-lg shadow-sm" data-aos="fade-up" data-aos-delay="200">
-              <div className="bg-black w-12 h-12 rounded-full flex items-center justify-center mb-4">
+              <div className="bg-gray-700 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                 <Camera className="h-6 w-6 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-3">Portrait Sessions</h3>
@@ -302,7 +343,7 @@ const HomePage = () => {
             </div>
 
             <div className="bg-gray-50 p-6 rounded-lg shadow-sm" data-aos="fade-up">
-              <div className="bg-black w-12 h-12 rounded-full flex items-center justify-center mb-4">
+              <div className="bg-gray-700 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                 <Clock className="h-6 w-6 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-3">Graduation Photography</h3>
@@ -317,7 +358,7 @@ const HomePage = () => {
             </div>
 
             <div className="bg-gray-50 p-6 rounded-lg shadow-sm" data-aos="fade-up" data-aos-delay="100">
-              <div className="bg-black w-12 h-12 rounded-full flex items-center justify-center mb-4">
+              <div className="bg-gray-700 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                 <Camera className="h-6 w-6 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-3">Commercial Photography</h3>
@@ -332,7 +373,7 @@ const HomePage = () => {
             </div>
 
             <div className="bg-gray-50 p-6 rounded-lg shadow-sm" data-aos="fade-up" data-aos-delay="200">
-              <div className="bg-black w-12 h-12 rounded-full flex items-center justify-center mb-4">
+              <div className="bg-gray-700 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                 <Heart className="h-6 w-6 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-3">Birthday Photography</h3>
@@ -389,7 +430,7 @@ const HomePage = () => {
                 <h4 className="font-semibold mb-3">Why Book With Us?</h4>
                 <ul className="space-y-2">
                   <li className="flex items-start">
-                    <div className="bg-black rounded-full p-1 mr-3 mt-1">
+                    <div className="bg-gray-700 rounded-full p-1 mr-3 mt-1">
                       <svg
                         className="w-3 h-3 text-white"
                         fill="none"
@@ -403,7 +444,7 @@ const HomePage = () => {
                     <span>Professional equipment and expertise</span>
                   </li>
                   <li className="flex items-start">
-                    <div className="bg-black rounded-full p-1 mr-3 mt-1">
+                    <div className="bg-gray-700 rounded-full p-1 mr-3 mt-1">
                       <svg
                         className="w-3 h-3 text-white"
                         fill="none"
@@ -417,7 +458,7 @@ const HomePage = () => {
                     <span>Customized photography packages</span>
                   </li>
                   <li className="flex items-start">
-                    <div className="bg-black rounded-full p-1 mr-3 mt-1">
+                    <div className="bg-gray-700 rounded-full p-1 mr-3 mt-1">
                       <svg
                         className="w-3 h-3 text-white"
                         fill="none"
@@ -431,7 +472,7 @@ const HomePage = () => {
                     <span>Quick turnaround time for edited photos</span>
                   </li>
                   <li className="flex items-start">
-                    <div className="bg-black rounded-full p-1 mr-3 mt-1">
+                    <div className="bg-gray-700 rounded-full p-1 mr-3 mt-1">
                       <svg
                         className="w-3 h-3 text-white"
                         fill="none"
@@ -456,11 +497,11 @@ const HomePage = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-gray-50">
+      <section id="contact" className="py-20 bg-gray-50 overflow-x-hidden">
         <div className="container mx-auto px-4 md:px-6">
           <SectionTitle title="Get in Touch" subtitle="Have questions? Reach out to us" center={true} />
 
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="grid md:grid-cols-2 gap-12 max-w-full">
             <div data-aos="fade-right">
               <ContactForm />
             </div>
@@ -471,7 +512,7 @@ const HomePage = () => {
 
                 <div className="space-y-6">
                   <div className="flex items-start">
-                    <div className="bg-black rounded-full p-2 mr-4">
+                    <div className="bg-gray-700 rounded-full p-2 mr-4">
                       <MapPin className="h-5 w-5 text-white" />
                     </div>
                     <div>
@@ -481,7 +522,7 @@ const HomePage = () => {
                   </div>
 
                   <div className="flex items-start">
-                    <div className="bg-black rounded-full p-2 mr-4">
+                    <div className="bg-gray-700 rounded-full p-2 mr-4">
                       <Phone className="h-5 w-5 text-white" />
                     </div>
                     <div>
@@ -491,17 +532,17 @@ const HomePage = () => {
                   </div>
 
                   <div className="flex items-start">
-                    <div className="bg-black rounded-full p-2 mr-4">
+                    <div className="bg-gray-700 rounded-full p-2 mr-4">
                       <Mail className="h-5 w-5 text-white" />
                     </div>
                     <div>
                       <h4 className="font-semibold mb-1">Email</h4>
-                      <p className="text-gray-700">info@teeshotz.com</p>
+                      <p className="text-gray-700 break-words">info@teeshotz.com</p>
                     </div>
                   </div>
 
                   <div className="flex items-start">
-                    <div className="bg-black rounded-full p-2 mr-4">
+                    <div className="bg-gray-700 rounded-full p-2 mr-4">
                       <Clock className="h-5 w-5 text-white" />
                     </div>
                     <div>
@@ -516,13 +557,13 @@ const HomePage = () => {
                 <div className="mt-8">
                   <h4 className="font-semibold mb-3">Follow Us</h4>
                   <div className="flex space-x-4">
-                    <a href="#" className="bg-black text-white p-2 rounded-full hover:bg-gray-800 transition-colors">
+                    <a href="#" className="bg-gray-700 text-white p-2 rounded-full hover:bg-gray-800 transition-colors">
                       <Instagram className="h-5 w-5" />
                     </a>
-                    <a href="#" className="bg-black text-white p-2 rounded-full hover:bg-gray-800 transition-colors">
+                    <a href="#" className="bg-gray-700 text-white p-2 rounded-full hover:bg-gray-800 transition-colors">
                       <Facebook className="h-5 w-5" />
                     </a>
-                    <a href="#" className="bg-black text-white p-2 rounded-full hover:bg-gray-800 transition-colors">
+                    <a href="#" className="bg-gray-700 text-white p-2 rounded-full hover:bg-gray-800 transition-colors">
                       <Twitter className="h-5 w-5" />
                     </a>
                   </div>
@@ -532,7 +573,7 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }
 

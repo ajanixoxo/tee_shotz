@@ -1,102 +1,93 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 
 import { useState, useEffect } from "react"
 import { useLocation } from "react-router-dom"
 import SectionTitle from "../components/SectionTitle"
 import ImageGallery from "../components/ImageGallery"
+import portfolioData from '../../portfolio-output.json'; // You may need to convert this to JSON or import as needed
+
+function getRandomItems(arr, n) {
+  const shuffled = arr.slice().sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, n);
+}
+
+function getLargeGoogleImageUrl(originalUrl, size = 990) {
+  // Extract the file ID from the original URL
+  const match = originalUrl.match(/id=([^&]+)/);
+  if (!match) return originalUrl; // fallback
+  const fileId = match[1];
+  return `https://lh3.googleusercontent.com/d/${fileId}=s${size}`;
+}
+
+function flattenPortfolioData(data) {
+  if (!data || !data.PICTURES || !data.PICTURES.PICTURES) return {};
+  // Recursively collect all images under each main category
+  const result = {};
+  const mainCategories = Object.keys(data.PICTURES.PICTURES);
+  for (const mainCat of mainCategories) {
+    let images = [];
+    function collectImages(obj) {
+      if (Array.isArray(obj)) {
+        images = images.concat(obj);
+      } else if (typeof obj === 'object' && obj !== null) {
+        for (const key in obj) {
+          collectImages(obj[key]);
+        }
+      }
+    }
+    collectImages(data.PICTURES.PICTURES[mainCat]);
+    // Map url to src for compatibility with ImageCard/ImageGallery, use high quality
+    result[mainCat] = getRandomItems(images, 10).map(img => ({
+      ...img,
+      src: getLargeGoogleImageUrl(img.url, 990),
+      alt: img.name || mainCat,
+    }));
+  }
+  return result;
+}
+
+const portfolioImages = flattenPortfolioData(portfolioData);
+const categories = [
+  { id: 'all', name: 'All Work' },
+  ...Object.keys(portfolioImages).map(cat => ({ id: cat.toLowerCase().replace(/\s+/g, '-'), name: cat }))
+];
 
 const PortfolioPage = () => {
-  const location = useLocation()
-  const [activeCategory, setActiveCategory] = useState("all")
+  const location = useLocation();
+  const [activeCategory, setActiveCategory] = useState('all');
 
-  // Categories for the portfolio
-  const categories = [
-    { id: "all", name: "All Work" },
-    { id: "weddings", name: "Weddings" },
-    { id: "convocation", name: "Convocation" },
-    { id: "birthday", name: "Birthday" },
-    { id: "casual", name: "Casual" },
-    { id: "events", name: "Events" },
-    { id: "FP", name: "Family Portraits" },
-  ]
-  // Sample images for each category
-  const portfolioImages = {
-    weddings: Array(6)
-      .fill()
-      .map((_, i) => ({
-        src: `/images/weddings/weddings (${i+1}).jpg`,
-        alt: `Wedding photography sample ${i + 1}`,
-      })),
-    convocation: Array(6)
-      .fill()
-      .map((_, i) => ({
-        src: `/images/convocation/convocation (${i+1}).jpg`,
-        alt: `Graduation photography sample ${i + 1}`,
-      })),
-    birthday: Array(3)
-      .fill()
-      .map((_, i) => ({
-        src: `/images/birthday/birthday (${i+1}).jpg`,
-        alt: `Birthday photography sample ${i + 1}`,
-      })),
-    casual: Array(6)
-      .fill()
-      .map((_, i) => ({
-        src: `/images/causal/causal (${i+1}).jpg`,
-        alt: `Casual photography sample ${i + 1}`,
-      })),
-    events: Array(6)
-      .fill()
-      .map((_, i) => ({
-        src: `/images/events/event (${i+3}).JPG`,
-        alt: `Event photography sample ${i + 1}`,
-      })),
-    FP: Array(6)
-      .fill()
-      .map((_, i) => ({
-        src: `/images/FP/FP (${i+1}).jpg`,
-        alt: `Commercial photography sample ${i + 1}`,
-      })),
-  }
-
-  // Handle hash changes to set active category
   useEffect(() => {
-    const hash = location.hash.replace("#", "")
+    const hash = location.hash.replace('#', '');
     if (hash && categories.some((cat) => cat.id === hash)) {
-      setActiveCategory(hash)
-
-      // Scroll to the category section with offset for the fixed header
+      setActiveCategory(hash);
       setTimeout(() => {
-        const element = document.getElementById(hash)
+        const element = document.getElementById(hash);
         if (element) {
-          const headerOffset = 100
-          const elementPosition = element.getBoundingClientRect().top
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset
-
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: "smooth",
-          })
+          const headerOffset = 100;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
         }
-      }, 100)
+      }, 100);
     }
-  }, [location, categories])
+  }, [location, categories]);
 
-  // Get all images or filtered by category
   const getFilteredImages = () => {
-    if (activeCategory === "all") {
+    if (activeCategory === 'all') {
       return Object.entries(portfolioImages).reduce((acc, [category, images]) => {
-        return [...acc, ...images.map((img) => ({ ...img, category }))]
-      }, [])
+        return [...acc, ...images.map((img) => ({ ...img, category }))];
+      }, []);
     }
-
-    return portfolioImages[activeCategory] || []
-  }
+    // Find the main category by id
+    const mainCat = Object.keys(portfolioImages).find(cat => cat.toLowerCase().replace(/\s+/g, '-') === activeCategory);
+    return portfolioImages[mainCat] || [];
+  };
 
   return (
     <>
       {/* Portfolio Hero */}
-      <section className="relative pt-32 pb-20 bg-black text-white">
+      <section className="relative pt-32 pb-20 bg-gray-700 text-white">
         <div className="container mx-auto px-4 md:px-6 text-center">
           <h1 className="handwriting text-5xl md:text-6xl font-bold mb-6" data-aos="fade-up">
             Portfolio
@@ -112,8 +103,8 @@ const PortfolioPage = () => {
                 key={category.id}
                 className={`px-4 py-2 rounded-full transition-colors ${
                   activeCategory === category.id
-                    ? "bg-white text-black"
-                    : "bg-transparent border border-white text-white hover:bg-white hover:bg-opacity-10"
+                    ? 'bg-white text-black'
+                    : 'bg-transparent border border-white text-white hover:bg-white hover:bg-opacity-10'
                 }`}
                 onClick={() => setActiveCategory(category.id)}
               >
@@ -127,31 +118,40 @@ const PortfolioPage = () => {
       {/* Portfolio Categories */}
       <section className="py-20">
         <div className="container mx-auto px-4 md:px-6">
-          {activeCategory === "all" ? (
-            // Display all categories when "All Work" is selected
+          {activeCategory === 'all' ? (
             categories
-              .filter((cat) => cat.id !== "all")
-              .map((category) => (
-                <div key={category.id} id={category.id} className="mb-20">
-                  <SectionTitle title={category.name} center={true} />
-                  <ImageGallery images={portfolioImages[category.id] || []} category={category.name} />
-                </div>
-              ))
+              .filter((cat) => cat.id !== 'all')
+              .map((category) => {
+                const mainCat = Object.keys(portfolioImages).find(catName => catName.toLowerCase().replace(/\s+/g, '-') === category.id);
+                return (
+                  <div key={category.id} id={category.id} className="mb-20">
+                    <SectionTitle title={category.name} center={true} />
+                    <ImageGallery images={portfolioImages[mainCat] || []} category={category.name} />
+                    <div className="text-center mt-4">
+                      <a
+                        href={`/portfolio/${category.id}`}
+                        className="inline-flex items-center px-6 py-2 bg-gray-700 hover:bg-gray-900 text-white rounded-md  transition-colors"
+                      >
+                        See All
+                      </a>
+                    </div>
+                  </div>
+                );
+              })
           ) : (
-            // Display only the selected category
             <div id={activeCategory}>
-              <SectionTitle title={categories.find((cat) => cat.id === activeCategory)?.name || ""} center={true} />
+              <SectionTitle title={categories.find((cat) => cat.id === activeCategory)?.name || ''} center={true} />
               <ImageGallery
                 images={getFilteredImages()}
-                category={categories.find((cat) => cat.id === activeCategory)?.name || ""}
+                category={categories.find((cat) => cat.id === activeCategory)?.name || ''}
               />
             </div>
           )}
         </div>
       </section>
     </>
-  )
-}
+  );
+};
 
-export default PortfolioPage
+export default PortfolioPage;
 

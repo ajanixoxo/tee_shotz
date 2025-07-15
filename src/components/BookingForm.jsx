@@ -144,7 +144,7 @@ const BookingForm = () => {
       <div className="text-center">
         <button
           type="submit"
-          className="px-8 py-3 bg-black text-white rounded-md hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
+          className="px-8 py-3 bg-gray-700 text-white rounded-md hover:bg-gray-900 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
         >
           Book Now
         </button>

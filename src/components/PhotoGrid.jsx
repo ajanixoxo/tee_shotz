@@ -74,7 +74,7 @@ const PhotoGrid = ({ className, images = sampleImages }) => {
             <img
               src={image.src || "/placeholder.svg"}
               alt={image.alt}
-              className="w-full h-full object-cover filter grayscale "
+              className="w-full h-full object-cover"
             />
           </div>
         ))}

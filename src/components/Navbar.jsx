@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { Menu, X, Camera } from "lucide-react"
+import logo from '/images/logo/Tee-shotz.png';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -34,39 +35,38 @@ const Navbar = () => {
 
   return (
     <header
-      className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? "bg-white shadow-md py-2" : "bg-transparent py-4 !text-white"}`}
+      className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? "bg-[#F9F6F2] shadow-md py-2" : "bg-[#F9F6F2] py-4 text-[#2D2D2D]"}`}
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center">
-            <Camera className="h-8 w-8 mr-2" />
-            <span className="handwriting text-2xl font-bold">Tee_Shotz</span>
+            <img src={logo} alt="Tee Shotz Logo" className="h-10 w-auto mr-2" />
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
             <Link
               to="/"
-              className={`transition-colors hover:text-gray-600 ${location.pathname === "/" ? "font-semibold" : ""}`}
+              className={`transition-colors hover:text-gray-700 ${location.pathname === "/" ? "font-semibold" : ""}`}
             >
               Home
             </Link>
-            <a href="/#about" className="transition-colors hover:text-gray-600">
+            <a href="/#about" className="transition-colors hover:text-gray-700">
               About
             </a>
             <Link
               to="/portfolio"
-              className={`transition-colors hover:text-gray-600 ${location.pathname === "/portfolio" ? "font-semibold" : ""}`}
+              className={`transition-colors hover:text-gray-700 ${location.pathname === "/portfolio" ? "font-semibold" : ""}`}
             >
               Portfolio
             </Link>
-            <a href="/#reviews" className="transition-colors hover:text-gray-600">
+            <a href="/#reviews" className="transition-colors hover:text-gray-700">
               Reviews
             </a>
-            <a href="/#book" className="transition-colors hover:text-gray-600">
+            <a href="/#book" className="transition-colors hover:text-gray-700">
               Book
             </a>
-            <a href="/#contact" className="transition-colors hover:text-gray-600">
+            <a href="/#contact" className="transition-colors hover:text-gray-700">
               Contact
             </a>
           </nav>
