@@ -15,13 +15,13 @@ const Footer = () => {
             </Link>
             <p className="mb-4">Capturing life's precious moments with an artistic touch. Every frame tells a story.</p>
             <div className="flex space-x-4">
-              <a href="#" className="hover:text-gray-300 transition-colors">
+              <a href="https://www.instagram.com/tee_shotz_/" className="hover:text-gray-300 transition-colors">
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="#" className="hover:text-gray-300 transition-colors">
+              <a href="https://web.facebook.com/fagbeji.tboy" className="hover:text-gray-300 transition-colors">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="#" className="hover:text-gray-300 transition-colors">
+              <a href="http://x.com/@tee_shotz_ " className="hover:text-gray-300 transition-colors">
                 <Twitter className="h-5 w-5" />
               </a>
             </div>
@@ -94,15 +94,15 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start">
                 <MapPin className="h-5 w-5 mr-2 mt-0.5" />
-                <span>123 Photography Lane, Creative City</span>
+                <span>Lagos State</span>
               </li>
               <li className="flex items-center">
                 <Phone className="h-5 w-5 mr-2" />
-                <span>+1 (555) 123-4567</span>
+                <span>+234 906 560 8632/+234 809 077 1265(Whatsapp)</span>
               </li>
               <li className="flex items-center">
                 <Mail className="h-5 w-5 mr-2" />
-                <span>info@teeshotz.com</span>
+                <span>Fagbejipaul@gmail.com</span>
               </li>
             </ul>
           </div>
