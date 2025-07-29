@@ -1,4 +1,26 @@
 {
+   "VIDEOS": {
+    "VIDEOS": {
+      "Real Estate Shoot": [
+        {
+          "url": "https://drive.google.com/file/d/1YMwqsrQ_6uPVi-X-Meiq9LSGSDD2mZQM/view?usp=sharing",
+          "name": "Marabella Real Estate Shoot",
+          "description": "A stunning real estate shoot showcasing luxury properties"
+        },
+        {
+          "url": "https://drive.google.com/file/d/11gHP5yXMNkqte2Zfjv-Or_gJdH1TGvp1/view?usp=sharing",
+          "name": "5 Bedroom Luxury Home Tour",
+          "description": "Explore a luxurious 5-bedroom home with modern amenities"
+        },
+        {
+          "url": "https://drive.google.com/file/d/17fITUXIAmBf-XCIBZINAYLxb8TWQYHIX/view?usp=sharing",
+          "name": "Bethel",
+          "description": "A beautifully crafted video showcasing the Bethel property"
+        }
+      ]
+     
+    }
+  },
   "PICTURES": {
     "PICTURES": {
       "FAMILY POTRAITS": {

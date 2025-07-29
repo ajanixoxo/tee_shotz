@@ -60,6 +60,12 @@ const Navbar = () => {
             >
               Portfolio
             </Link>
+            <Link
+              to="/video-portfolio"
+              className={`transition-colors hover:text-gray-700 ${location.pathname === "/portfolio" ? "font-semibold" : ""}`}
+            >
+              Videography
+            </Link>
             <a href="/#reviews" className="transition-colors hover:text-gray-700">
               Reviews
             </a>
@@ -91,6 +97,12 @@ const Navbar = () => {
           </a>
           <Link to="/portfolio" className="py-2 hover:text-gray-600">
             Portfolio
+          </Link>
+          <Link
+            to="/video-portfolio"
+            className={`transition-colors hover:text-gray-700 ${location.pathname === "/portfolio" ? "font-semibold" : ""}`}
+          >
+            Videography
           </Link>
           <a href="/#reviews" className="py-2 hover:text-gray-600">
             Reviews

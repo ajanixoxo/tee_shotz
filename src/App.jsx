@@ -5,7 +5,7 @@ import HomePage from "./pages/HomePage"
 import PortfolioPage from "./pages/PortfolioPage"
 import PortfolioCategoryPage from './pages/PortfolioCategoryPage';
 import ScrollToTop from "./components/ScrollToTop"
-
+import VideoPortfolioPage from "./components/VideoPortfolio"
 function App() {
   return (
     <>
@@ -16,6 +16,8 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/portfolio" element={<PortfolioPage />} />
           <Route path="/portfolio/:category" element={<PortfolioCategoryPage />} />
+          <Route path="/video-portfolio" element={<VideoPortfolioPage />} />
+          <Route path="/video-portfolio/:category" element={<VideoPortfolioPage />} />
         </Routes>
       </main>
       <Footer />

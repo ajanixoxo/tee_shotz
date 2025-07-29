@@ -19,6 +19,7 @@ import BookingForm from "../components/BookingForm"
 import ContactForm from "../components/ContactForm"
 import TestimonialCard from "../components/TestimonialCard"
 import ImageCard from "../components/ImageCard"
+import VideoCard from "../components/VideoCard"
 import PhotoGrid from "../components/PhotoGrid"
 import portfolioData from '../../portfolio-output.json';
 
@@ -57,7 +58,7 @@ function flattenPortfolioPreviewData(data, n = 6) {
   return result;
 }
 
-const portfolioPreviewImages = flattenPortfolioPreviewData(portfolioData, 4);
+const portfolioPreviewImages = flattenPortfolioPreviewData(portfolioData, 2);
 const previewCategories = Object.keys(portfolioPreviewImages);
 
 const heroImages = [
@@ -278,7 +279,7 @@ const HomePage = () => {
           <div className="text-center" data-aos="fade-up">
             <Link
               to="/portfolio"
-              className="inline-flex items-center px-8 py-3 bg-gray-700 text-[#2D2D2D] rounded-md hover:bg-[#7D5A3A] hover:text-white transition-colors"
+              className="inline-flex items-center px-8 py-3 bg-gray-700 text-white rounded-md hover:bg-[#7D5A3A] hover:text-white transition-colors"
             >
               View Full Portfolio
               <ArrowRight className="ml-2 h-4 w-4" />
