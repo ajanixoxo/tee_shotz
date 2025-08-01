@@ -22,17 +22,33 @@ const BookingForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // In a real application, you would send this data to your backend
-    console.log("Form submitted:", formData)
-    alert("Thank you for your booking request! We will contact you soon.")
+
+    // Your WhatsApp number (replace with your actual number)
+    const phoneNumber = "+2348090771265" // Replace with your WhatsApp number including country code
+
+    // Format the message for WhatsApp
+    const whatsappMessage = `*New Contact Form Submission*
+    
+*Name:* ${formData.name}
+*Email:* ${formData.email}
+
+*Message:*
+${formData.message}`
+
+    // Encode the message for URL
+    const encodedMessage = encodeURIComponent(whatsappMessage)
+
+    // Create WhatsApp URL
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`
+
+    // Open WhatsApp
+    window.open(whatsappURL, '_blank')
 
     // Reset form
     setFormData({
       name: "",
       email: "",
-      phone: "",
-      date: "",
-      eventType: "",
+      subject: "",
       message: "",
     })
   }

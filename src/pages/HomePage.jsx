@@ -19,7 +19,6 @@ import BookingForm from "../components/BookingForm"
 import ContactForm from "../components/ContactForm"
 import TestimonialCard from "../components/TestimonialCard"
 import ImageCard from "../components/ImageCard"
-import VideoCard from "../components/VideoCard"
 import PhotoGrid from "../components/PhotoGrid"
 import portfolioData from '../../portfolio-output.json';
 
@@ -90,65 +89,31 @@ const heroImages = [
 
   
 const HomePage = () => {
-  // Sample portfolio images for preview section
-  // const portfolioPreview = [
-  //   {
-  //     src: "/images/weddings/weddings (6).jpg",
-  //     alt: "Wedding photography",
-  //     category: "Weddings",
-  //   },
-  //   {
-  //     src: "/images/convocation/convocation (3).jpg",
-  //     alt: "Graduation photography",
-  //     category: "Convocation",
-  //   },
-  //   {
-  //     src: "/images/birthday/birthday (2).jpg",
-  //     alt: "Birthday photography",
-  //     category: "Birthday",
-  //   },
-  //   {
-  //     src: "/images/causal/causal (5).jpg",
-  //     alt: "Casual photography",
-  //     category: "Casual",
-  //   },
-  //   {
-  //     src: "/images/events/event (1).jpg",
-  //     alt: "Event photography",
-  //     category: "Events",
-  //   },
-  //   {
-  //     src: "/images/causal/causal (2).jpg",
-  //     alt: "Behind the scenes",
-  //     category: "BTS",
-  //   },
-  // ]
 
-  // Sample testimonials
   const testimonials = [
     {
-      name: "Sarah Johnson",
-      role: "Bride",
+      name: "Amaka",
+      role: "",
       image: "https://placehold.co/100x100",
       rating: 5,
       testimonial:
-        "Tee_Shotz captured our wedding day perfectly. Every emotion, every detail was beautifully preserved. We couldn't be happier with the results!",
+        "Thank you so much Taiwo, I love what i am seeing💃💃💃 ",
     },
     {
-      name: "Michael Chen",
+      name: "Client",
       role: "Corporate Client",
       image: "https://placehold.co/100x100",
       rating: 5,
       testimonial:
-        "Professional, punctual, and incredibly talented. Our company event photos exceeded expectations and were delivered ahead of schedule.",
+        "Good Evening Uncle T, I must say you really did a very good job with everything ",
     },
     {
-      name: "Jessica Williams",
+      name: "Client",
       role: "Graduate",
       image: "https://placehold.co/100x100",
       rating: 4,
       testimonial:
-        "My graduation photos are absolutely stunning! Tee_Shotz has a unique eye for composition and made me feel so comfortable during the shoot.",
+        "This is perfect, I love the pictures, you are the best Taiwo",
     },
   ]
 
@@ -166,7 +131,7 @@ const HomePage = () => {
             Capturing Moments, Creating Memories
           </h1>
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-            Professional photography services by Tee_Shotz
+            Professional photography services by Tee_Shotz_
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4" data-aos="fade-up" data-aos-delay="200">
             <Link
@@ -191,30 +156,33 @@ const HomePage = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div data-aos="fade-right">
               <img
-                src="/images/causal/causal (16).jpg"
+                src="/images/tee_shotz_.jpg"
                 alt="Photographer portrait"
                 className="rounded-lg shadow-lg w-full h-auto"
               />
             </div>
 
             <div data-aos="fade-left">
-              <SectionTitle title="About Tee_Shotz" center={false} />
+              <SectionTitle title="About Tee_Shotz_" center={false} />
 
               <p className="mb-6 text-gray-700">
-                With over 10 years of experience in photography, I've dedicated my career to capturing life's most
-                precious moments with creativity and passion. My journey began with a simple love for freezing time
-                through the lens, and has evolved into a professional pursuit of visual storytelling.
+             Fagbeji Taiwo, popularly known as Teeshotz, is a passionate Nigerian visual storyteller whose work blends 
+             photography and videography to capture life&aspo;s most meaningful moments. With a strong eye for detail
+              and a deep commitment to excellence, he leads a dynamic media team specializing in event coverage, 
+              documentary production, and content creation for both personal and organizational narratives.
+
               </p>
 
               <p className="mb-6 text-gray-700">
-                I specialize in wedding photography, portraits, events, and commercial work. My style blends classic
-                elegance with contemporary flair, ensuring timeless images that you'll treasure for generations.
+              Through Teeshotz Media, Taiwo has covered numerous weddings, outreaches, and brand events, including
+              working with faith-based and non-profit organizations such as Oluwaseyi Bababusola Foundation and Reverers,
+              where his visuals help drive messages of hope, purpose, and social impact. His creative vision is rooted 
+              in authenticity, emotion, and storytelling that connects people to the heart of every moment..
               </p>
 
               <p className="mb-8 text-gray-700">
-                Every client and every shoot is unique. I take the time to understand your vision and work
-                collaboratively to exceed your expectations. My goal is not just to take pictures, but to create art
-                that resonates with your personal story.
+               Whether behind the lens or directing a media team, Fagbeji Taiwo continues to raise the 
+               standard of excellence in Nigeria&aspo;s creative media space—one frame at time.
               </p>
 
               <div className="grid grid-cols-3 gap-6 mb-8">
@@ -423,7 +391,7 @@ const HomePage = () => {
               <SectionTitle title="Book a Session" center={false} />
 
               <p className="mb-6 text-gray-700">
-                Ready to capture your special moments? Fill out the form to book a photography session with Tee_Shotz.
+                Ready to capture your special moments? Fill out the form to book a photography session with Tee_Shotz_.
                 We'll get back to you within 24 hours to discuss your requirements and confirm your booking.
               </p>
 
@@ -518,7 +486,7 @@ const HomePage = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold mb-1">Studio Address</h4>
-                      <p className="text-gray-700">123 Photography Lane, Creative City</p>
+                      <p className="text-gray-700">Lagos State</p>
                     </div>
                   </div>
 
@@ -528,7 +496,7 @@ const HomePage = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold mb-1">Phone</h4>
-                      <p className="text-gray-700">+1 (555) 123-4567</p>
+                      <p className="text-gray-700">+234 809 077 1265</p>
                     </div>
                   </div>
 
@@ -538,7 +506,7 @@ const HomePage = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold mb-1">Email</h4>
-                      <p className="text-gray-700 break-words">info@teeshotz.com</p>
+                      <p className="text-gray-700 break-words">Fagbejipaul@gmail.com</p>
                     </div>
                   </div>
 
@@ -558,13 +526,13 @@ const HomePage = () => {
                 <div className="mt-8">
                   <h4 className="font-semibold mb-3">Follow Us</h4>
                   <div className="flex space-x-4">
-                    <a href="#" className="bg-gray-700 text-white p-2 rounded-full hover:bg-gray-800 transition-colors">
+                    <a href="https://www.instagram.com/tee_shotz_/" className="bg-gray-700 text-white p-2 rounded-full hover:bg-gray-800 transition-colors">
                       <Instagram className="h-5 w-5" />
                     </a>
-                    <a href="#" className="bg-gray-700 text-white p-2 rounded-full hover:bg-gray-800 transition-colors">
+                    <a href="https://web.facebook.com/fagbeji.tboy" className="bg-gray-700 text-white p-2 rounded-full hover:bg-gray-800 transition-colors">
                       <Facebook className="h-5 w-5" />
                     </a>
-                    <a href="#" className="bg-gray-700 text-white p-2 rounded-full hover:bg-gray-800 transition-colors">
+                    <a href="http://x.com/@tee_shotz_" className="bg-gray-700 text-white p-2 rounded-full hover:bg-gray-800 transition-colors">
                       <Twitter className="h-5 w-5" />
                     </a>
                   </div>

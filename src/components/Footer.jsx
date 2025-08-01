@@ -11,7 +11,7 @@ const Footer = () => {
           <div>
             <Link to="/" className="flex items-center mb-4">
               <Camera className="h-8 w-8 mr-2" />
-              <span className="handwriting text-2xl font-bold">Tee_Shotz</span>
+              <img src="/images/logo/Tee-shotz-2.png" className="handwriting text-2xl font-bold w-40 "/>
             </Link>
             <p className="mb-4">Capturing life's precious moments with an artistic touch. Every frame tells a story.</p>
             <div className="flex space-x-4">
